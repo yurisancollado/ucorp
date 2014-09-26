@@ -27,7 +27,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nivel'); ?>
-		<?php echo $form->dropDownList($model,'area_id', $model->niveles, array('empty' => 'Elige una opción')); ?>
+		<?php echo $form->dropDownList($model,'nivel', $model->niveles, array('empty' => 'Elige una opción')); ?>
 		<?php echo $form->error($model,'nivel'); ?>
 	</div>
 

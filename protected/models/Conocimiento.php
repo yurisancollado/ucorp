@@ -111,4 +111,12 @@ class Conocimiento extends CActiveRecord
 	public function getNiveles(){
 		return array(1=>'Novato', 2=>'Bajo', 3=>'Medio',4=>'Alto',5=>'Muy Alto', 6=>'Experto');
 	}
+	public function getNivelText(){
+		$arr= array(1=>'Novato', 2=>'Bajo', 3=>'Medio',4=>'Alto',5=>'Muy Alto', 6=>'Experto');
+		return $arr[$this->nivel];
+	}
+	public function getAreaText(){
+		$area=Area::model()->findByPk($this->area_id);
+		return $area->nombre;
+	}
 }

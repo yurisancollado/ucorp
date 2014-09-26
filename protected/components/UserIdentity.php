@@ -17,7 +17,7 @@ class UserIdentity extends CUserIdentity {
 	 * @return boolean whether authentication succeeds.
 	 */
 	public function authenticate() {
-		$usuario = new SoapClient('http://localhost:81/webservice/index.php?r=usuario/quote');
+		$usuario = new SoapClient('http://localhost/webservice/index.php?r=usuario/quote');
 		if ($usuario -> getExisteUsuario($this -> username) == 0)
 			$this -> errorCode = self::ERROR_USERNAME_INVALID;
 		else if ($usuario -> getValidarUsuario($this -> username, $this -> password)== -1)
