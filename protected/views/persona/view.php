@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Persona #<?php echo $model->id; ?></h1>
+<h1><?php echo "Postulante ".$model->nombres." ".$model->apellidos; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -195,10 +195,9 @@ $this->menu=array(
 
 <?php
 	if(isset($model->usuario))
-		echo "ALEGRIA";
-	else {
-		echo "SADNESS";
-	}
+		echo "Nombre de Usuario: <b>".$model->usuario->nombre."</b>";
+	else $this->renderPartial('_usu', array('model'=>$usu,'id'=>$model->id)); 
+	
 ?>
 
 

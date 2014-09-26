@@ -36,6 +36,7 @@ class Usuario extends CActiveRecord
 			array('nombre, contraseña, creado, persona_id', 'required'),
 			array('persona_id, tipo', 'numerical', 'integerOnly'=>true),
 			array('nombre, contraseña', 'length', 'max'=>45),
+			array('nombre', 'unique','message'=>'Nombre de usuario ya existe'),
 			array('ultimaSesion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

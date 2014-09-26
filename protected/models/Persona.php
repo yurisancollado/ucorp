@@ -63,7 +63,7 @@ class Persona extends CActiveRecord
 			'empleados' => array(self::HAS_MANY, 'Empleado', 'persona_id'),
 			'experiencias' => array(self::HAS_MANY, 'Experiencia', 'persona_id'),
 			'postulaciones' => array(self::HAS_MANY, 'Postulacion', 'persona_id'),
-			'usuarios' => array(self::HAS_ONE, 'Usuario', 'persona_id'),
+			'usuario' => array(self::HAS_ONE, 'Usuario', 'persona_id'),
 		);
 	}
 

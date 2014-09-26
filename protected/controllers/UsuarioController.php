@@ -1,6 +1,6 @@
 <?php
 
-class PersonaController extends Controller
+class UsuarioController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -33,11 +33,11 @@ class PersonaController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('*'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -50,55 +50,9 @@ class PersonaController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{	$exp=new Experiencia;
-		$con=new Conocimiento;
-		$edu=new Educacion;
-		$usu=new Usuario;
-		$this->performAjaxValidation($usu);
-		if(isset($_POST['Experiencia']))
-		{
-			$mod=new Experiencia;	
-			$mod->attributes=$_POST['Experiencia'];
-			$mod->save();
-			unset($mod);
-			
-		}	
-		if(isset($_POST['Educacion']))
-		{
-			$mod=new Educacion;	
-			$mod->attributes=$_POST['Educacion'];
-			$mod->save();
-			unset($mod);
-			
-		}	
-		if(isset($_POST['Conocimiento']))
-		{
-			$mod=new Conocimiento;	
-			$mod->attributes=$_POST['Conocimiento'];
-			$mod->save();
-			unset($mod);
-			
-		}	
-		if(isset($_POST['Usuario']))
-		{
-			$mod=new Usuario;	
-			$mod->attributes=$_POST['Usuario'];
-			$mod->contraseña=$_POST['contrasena'];
-			$mod->creado=date('Y-m-d H:i:s');
-			if(!$mod->save())
-			{
-				print_r($mod->errors);
-				break;
-			}
-			unset($mod);
-			
-		}			
+	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-			'exp'=>$exp,
-			'con'=>$con,
-			'edu'=>$edu,
-			'usu'=>$usu
 		));
 	}
 
@@ -108,14 +62,14 @@ class PersonaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Persona;
-		
-		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+		$model=new Usuario;
 
-		if(isset($_POST['Persona']))
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Usuario']))
 		{
-			$model->attributes=$_POST['Persona'];
+			$model->attributes=$_POST['Usuario'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -137,9 +91,9 @@ class PersonaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Persona']))
+		if(isset($_POST['Usuario']))
 		{
-			$model->attributes=$_POST['Persona'];
+			$model->attributes=$_POST['Usuario'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -168,7 +122,7 @@ class PersonaController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Persona');
+		$dataProvider=new CActiveDataProvider('Usuario');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -179,10 +133,10 @@ class PersonaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Persona('search');
+		$model=new Usuario('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Persona']))
-			$model->attributes=$_GET['Persona'];
+		if(isset($_GET['Usuario']))
+			$model->attributes=$_GET['Usuario'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -193,12 +147,12 @@ class PersonaController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Persona the loaded model
+	 * @return Usuario the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Persona::model()->findByPk($id);
+		$model=Usuario::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -206,11 +160,11 @@ class PersonaController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Persona $model the model to be validated
+	 * @param Usuario $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='persona-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='usuario-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
